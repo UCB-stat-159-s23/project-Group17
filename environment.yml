@@ -7,6 +7,7 @@ dependencies:
   - ipykernel
   - pandas=1.2.0
   - numpy=1.23.5
+  - matplotlib=3.7.1
   - seaborn=0.12.2
   - scikit-learn=1.2.0
 prefix: /home/jovyan/envs/developer
