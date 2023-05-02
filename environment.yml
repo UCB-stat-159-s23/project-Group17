@@ -1,15 +1,12 @@
-name: ligo
-
+name: developer
 channels:
   - conda-forge
   - defaults
-
 dependencies:
-  - python=3.8
-  - numpy=1.23
-  - h5py=3.7
-  - matplotlib=3.5
-  - ipython=8.2
-  - ipykernel=5.5
-  - decorator=5.1
-  - scipy=1.8
+  - python=3.9
+  - ipykernel
+  - pandas=1.2.0
+  - numpy=1.23.5
+  - seaborn=0.12.2
+  - scikit-learn=1.2.0
+prefix: /home/jovyan/envs/developer
