@@ -1,0 +1,2380 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>STAT Project- Group 17: Exploring Crime Trends with Machine Learning &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'EDAandModel';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    STAT Project- Group 17: Exploring Crime Trends with Machine Learning
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FEDAandModel.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/EDAandModel.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>STAT Project- Group 17: Exploring Crime Trends with Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authors-andy-zuo-lia-yang-helen-tan">Authors: Andy Zuo, Lia Yang, Helen Tan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis-eda">Exploratory Data Analysis(EDA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-add-more-data-cleaning">Data Cleaning - add more data cleaning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-visualization-add-more-visualizations-based-on-the-two-assumption-at-main-ipynb-and-add-description-for-each-visualization-such-as-purpose-and-the-visualization-anaylysis-and-findings">Data visualization - Add more visualizations based on the two assumption at Main.ipynb and add description for each visualization such as purpose and the visualization anaylysis, and findings.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-and-histogram-age-and-crime">Heatmap and Histogram - Age and Crime</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-and-histogram-past-minor-offenses-and-crime">Heatmap and Histogram - Past minor offenses and Crime</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineer-try-to-understand-the-future-engineer-do-and-try-to-add-some-more-feature-engine-that-is-useful-for-random-forest-model">Feature Engineer - try to understand the future engineer do, and try to add some more feature engine that is useful for random forest model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-screening-date-to-year-month-and-day">split screening_date to year, month and day</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-string-features-to-integer">Convert string features to integer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-long-tail-distribution-to-normal-distribution-by-log-transformation">Convert long tail distribution to normal distribution by log transformation.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-features-with-low-standard-deviation">Remove features with low standard deviation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-sparse-features">remove sparse features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers-detection">Outliers detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-using-random-forest-determine-the-features-that-have-the-biggest-influence-on-committing-crime-again">Models - Using Random Forest, determine the features that have the biggest influence on committing crime again</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-discussed-about-the-results-and-interested-findings-further-from-our-model-in-the-main-ipynb">We will discussed about the results and interested findings further from our model in the main.ipynb</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="stat-project-group-17-exploring-crime-trends-with-machine-learning">
+<h1>STAT Project- Group 17: Exploring Crime Trends with Machine Learning<a class="headerlink" href="#stat-project-group-17-exploring-crime-trends-with-machine-learning" title="Permalink to this heading">#</a></h1>
+<section id="authors-andy-zuo-lia-yang-helen-tan">
+<h2>Authors: Andy Zuo, Lia Yang, Helen Tan<a class="headerlink" href="#authors-andy-zuo-lia-yang-helen-tan" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">set_printoptions</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">GridSearchCV</span>
+
+<span class="kn">from</span> <span class="nn">tools</span> <span class="kn">import</span> <span class="n">utils</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exploratory-data-analysis-eda">
+<h2>Exploratory Data Analysis(EDA)<a class="headerlink" href="#exploratory-data-analysis-eda" title="Permalink to this heading">#</a></h2>
+<section id="data-cleaning-add-more-data-cleaning">
+<h3>Data Cleaning - add more data cleaning<a class="headerlink" href="#data-cleaning-add-more-data-cleaning" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crime_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/crime.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crime_data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1954, 53)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crime_data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>person_id</th>
+      <th>sex</th>
+      <th>age_at_current_charge</th>
+      <th>age_at_first_charge</th>
+      <th>p_charges</th>
+      <th>p_incarceration</th>
+      <th>p_probation</th>
+      <th>p_juv_fel_count</th>
+      <th>p_felprop_viol</th>
+      <th>p_murder</th>
+      <th>...</th>
+      <th>drug_two_year</th>
+      <th>property_two_year</th>
+      <th>misdemeanor_two_year</th>
+      <th>felony_two_year</th>
+      <th>violent_two_year</th>
+      <th>drug_six_month</th>
+      <th>property_six_month</th>
+      <th>misdemeanor_six_month</th>
+      <th>felony_six_month</th>
+      <th>violent_six_month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>...</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>3260.150461</td>
+      <td>0.871546</td>
+      <td>31.971853</td>
+      <td>23.956499</td>
+      <td>11.228762</td>
+      <td>0.351586</td>
+      <td>0.967247</td>
+      <td>0.112590</td>
+      <td>0.996929</td>
+      <td>0.017400</td>
+      <td>...</td>
+      <td>0.093142</td>
+      <td>0.089560</td>
+      <td>0.272262</td>
+      <td>0.176049</td>
+      <td>0.209826</td>
+      <td>0.039918</td>
+      <td>0.050154</td>
+      <td>0.125384</td>
+      <td>0.089048</td>
+      <td>0.084442</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1900.758354</td>
+      <td>0.334681</td>
+      <td>11.008898</td>
+      <td>8.868941</td>
+      <td>11.223027</td>
+      <td>0.477588</td>
+      <td>1.481047</td>
+      <td>0.708095</td>
+      <td>2.217787</td>
+      <td>0.174411</td>
+      <td>...</td>
+      <td>0.290706</td>
+      <td>0.285623</td>
+      <td>0.445238</td>
+      <td>0.380959</td>
+      <td>0.407289</td>
+      <td>0.195817</td>
+      <td>0.218318</td>
+      <td>0.331238</td>
+      <td>0.284886</td>
+      <td>0.278121</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.000000</td>
+      <td>0.000000</td>
+      <td>18.000000</td>
+      <td>0.000000</td>
+      <td>2.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1576.250000</td>
+      <td>1.000000</td>
+      <td>23.000000</td>
+      <td>18.000000</td>
+      <td>4.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>3291.000000</td>
+      <td>1.000000</td>
+      <td>29.000000</td>
+      <td>20.000000</td>
+      <td>8.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>4952.500000</td>
+      <td>1.000000</td>
+      <td>39.000000</td>
+      <td>27.000000</td>
+      <td>14.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>6468.000000</td>
+      <td>1.000000</td>
+      <td>69.000000</td>
+      <td>60.000000</td>
+      <td>218.000000</td>
+      <td>1.000000</td>
+      <td>16.000000</td>
+      <td>14.000000</td>
+      <td>29.000000</td>
+      <td>4.000000</td>
+      <td>...</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 51 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crime_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>person_id</th>
+      <th>screening_date</th>
+      <th>sex</th>
+      <th>race</th>
+      <th>age_at_current_charge</th>
+      <th>age_at_first_charge</th>
+      <th>p_charges</th>
+      <th>p_incarceration</th>
+      <th>p_probation</th>
+      <th>p_juv_fel_count</th>
+      <th>...</th>
+      <th>drug_two_year</th>
+      <th>property_two_year</th>
+      <th>misdemeanor_two_year</th>
+      <th>felony_two_year</th>
+      <th>violent_two_year</th>
+      <th>drug_six_month</th>
+      <th>property_six_month</th>
+      <th>misdemeanor_six_month</th>
+      <th>felony_six_month</th>
+      <th>violent_six_month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1001</td>
+      <td>2014-02-03</td>
+      <td>1</td>
+      <td>African-American</td>
+      <td>45</td>
+      <td>19</td>
+      <td>39</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>101</td>
+      <td>2013-01-13</td>
+      <td>1</td>
+      <td>Hispanic</td>
+      <td>42</td>
+      <td>26</td>
+      <td>9</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>101</td>
+      <td>2014-02-02</td>
+      <td>1</td>
+      <td>Hispanic</td>
+      <td>43</td>
+      <td>26</td>
+      <td>15</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1015</td>
+      <td>2014-01-22</td>
+      <td>1</td>
+      <td>African-American</td>
+      <td>35</td>
+      <td>19</td>
+      <td>47</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1016</td>
+      <td>2013-04-15</td>
+      <td>1</td>
+      <td>Other</td>
+      <td>27</td>
+      <td>18</td>
+      <td>11</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 53 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crime_data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>person_id                0
+screening_date           0
+sex                      0
+race                     0
+age_at_current_charge    0
+age_at_first_charge      0
+p_charges                0
+p_incarceration          0
+p_probation              0
+p_juv_fel_count          0
+p_felprop_viol           0
+p_murder                 0
+p_felassault             0
+p_misdeassault           0
+p_famviol                0
+p_sex_offense            0
+p_weapon                 0
+p_fta_two_year           0
+p_fta_two_year_plus      0
+current_violence         0
+current_violence20       0
+p_pending_charge         0
+p_felony                 0
+p_misdemeanor            0
+p_violence               0
+total_convictions        0
+p_arrest                 0
+p_property               0
+p_traffic                0
+p_drug                   0
+p_dui                    0
+p_domestic               0
+p_stalking               0
+p_voyeurism              0
+p_fraud                  0
+p_stealing               0
+p_trespass               0
+six_month                0
+one_year                 0
+three_year               0
+five_year                0
+general_two_year         0
+general_six_month        0
+drug_two_year            0
+property_two_year        0
+misdemeanor_two_year     0
+felony_two_year          0
+violent_two_year         0
+drug_six_month           0
+property_six_month       0
+misdemeanor_six_month    0
+felony_six_month         0
+violent_six_month        0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crime_data</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>person_id                 int64
+screening_date           object
+sex                       int64
+race                     object
+age_at_current_charge     int64
+age_at_first_charge       int64
+p_charges                 int64
+p_incarceration           int64
+p_probation               int64
+p_juv_fel_count           int64
+p_felprop_viol            int64
+p_murder                  int64
+p_felassault              int64
+p_misdeassault            int64
+p_famviol                 int64
+p_sex_offense             int64
+p_weapon                  int64
+p_fta_two_year            int64
+p_fta_two_year_plus       int64
+current_violence          int64
+current_violence20        int64
+p_pending_charge          int64
+p_felony                  int64
+p_misdemeanor             int64
+p_violence                int64
+total_convictions         int64
+p_arrest                  int64
+p_property                int64
+p_traffic                 int64
+p_drug                    int64
+p_dui                     int64
+p_domestic                int64
+p_stalking                int64
+p_voyeurism               int64
+p_fraud                   int64
+p_stealing                int64
+p_trespass                int64
+six_month                 int64
+one_year                  int64
+three_year                int64
+five_year                 int64
+general_two_year          int64
+general_six_month         int64
+drug_two_year             int64
+property_two_year         int64
+misdemeanor_two_year      int64
+felony_two_year           int64
+violent_two_year          int64
+drug_six_month            int64
+property_six_month        int64
+misdemeanor_six_month     int64
+felony_six_month          int64
+violent_six_month         int64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-visualization-add-more-visualizations-based-on-the-two-assumption-at-main-ipynb-and-add-description-for-each-visualization-such-as-purpose-and-the-visualization-anaylysis-and-findings">
+<h3>Data visualization - Add more visualizations based on the two assumption at Main.ipynb and add description for each visualization such as purpose and the visualization anaylysis, and findings.<a class="headerlink" href="#data-visualization-add-more-visualizations-based-on-the-two-assumption-at-main-ipynb-and-add-description-for-each-visualization-such-as-purpose-and-the-visualization-anaylysis-and-findings" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crime_data</span> <span class="o">=</span> <span class="n">crime_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;p_famviol&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">correlation</span> <span class="o">=</span> <span class="n">crime_data</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">correlation</span><span class="p">[</span><span class="s1">&#39;total_convictions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total_convictions        1.00
+p_misdemeanor            0.89
+p_arrest                 0.89
+p_pending_charge         0.86
+p_charges                0.83
+p_felony                 0.81
+p_probation              0.64
+p_drug                   0.62
+p_violence               0.59
+p_property               0.54
+p_stealing               0.49
+p_felprop_viol           0.47
+p_trespass               0.42
+p_incarceration          0.37
+p_traffic                0.33
+p_felassault             0.28
+age_at_current_charge    0.23
+p_juv_fel_count          0.21
+p_weapon                 0.19
+felony_two_year          0.16
+general_two_year         0.15
+one_year                 0.12
+violent_two_year         0.12
+three_year               0.12
+p_misdeassault           0.12
+p_dui                    0.11
+general_six_month        0.11
+property_two_year        0.10
+five_year                0.09
+sex                      0.09
+drug_two_year            0.08
+felony_six_month         0.08
+six_month                0.08
+property_six_month       0.07
+misdemeanor_six_month    0.06
+violent_six_month        0.06
+p_fta_two_year           0.06
+p_fraud                  0.04
+p_stalking               0.04
+drug_six_month           0.04
+misdemeanor_two_year     0.03
+p_domestic               0.02
+p_fta_two_year_plus      0.02
+p_murder                 0.02
+person_id                0.02
+p_sex_offense           -0.00
+p_voyeurism             -0.01
+current_violence        -0.07
+current_violence20      -0.13
+age_at_first_charge     -0.17
+Name: total_convictions, dtype: float64 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2819/2983602702.py:2: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.
+  correlation = crime_data.corr().round(2)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="heatmap-and-histogram-age-and-crime">
+<h3>Heatmap and Histogram - Age and Crime<a class="headerlink" href="#heatmap-and-histogram-age-and-crime" title="Permalink to this heading">#</a></h3>
+<p>We used heatmap to show the relationship between two or more variables and to reduce redundancy, such as the relationship between age and the likelihood of committing a crime.</p>
+<p>We found that age is indeed a factor in criminal behavior, as older people tend to have more convictions and pending charges, and tend to commit their first crime at an older age. However, it’s important to keep in mind that correlation does not necessarily imply causal relationships, and further analysis is needed to determine the nature of these relationships.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;age_at_current_charge&quot;</span><span class="p">,</span> <span class="s2">&quot;age_at_first_charge&quot;</span><span class="p">,</span> <span class="s2">&quot;total_convictions&quot;</span><span class="p">,</span> <span class="s2">&quot;p_pending_charge&quot;</span><span class="p">]</span>
+<span class="n">correlation_coefs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">crime_data</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation_coefs</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;crest&#39;</span><span class="p">,</span>
+            <span class="n">linecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">},</span> <span class="n">yticklabels</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">heatmap</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">heatmap</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/heatmap1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b25a49f792a5f4b6e5b4310ff75401748eedd70b43318c1c062e16e7f419e5bb.png" src="_images/b25a49f792a5f4b6e5b4310ff75401748eedd70b43318c1c062e16e7f419e5bb.png" />
+</div>
+</div>
+<p>We use histograms to see the overall pattern and distribution of a variable, as well as identify any outliers or unusual values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">hist_features1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;age_at_current_charge&quot;</span><span class="p">,</span> <span class="s2">&quot;age_at_first_charge&quot;</span><span class="p">,</span> <span class="s2">&quot;total_convictions&quot;</span><span class="p">,</span> <span class="s2">&quot;p_pending_charge&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hist_features1</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">k</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="o">%</span><span class="k">2</span>].set_title(feature)
+    <span class="n">crime_data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">k</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="o">%</span><span class="k">2</span>], color = &#39;lightgreen&#39;)
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/histogram1.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/17423c690f84ed66f583a6d701536ea5d0ac256eb89eb5a1a755faed0795cb63.png" src="_images/17423c690f84ed66f583a6d701536ea5d0ac256eb89eb5a1a755faed0795cb63.png" />
+</div>
+</div>
+</section>
+<section id="heatmap-and-histogram-past-minor-offenses-and-crime">
+<h3>Heatmap and Histogram - Past minor offenses and Crime<a class="headerlink" href="#heatmap-and-histogram-past-minor-offenses-and-crime" title="Permalink to this heading">#</a></h3>
+<p>Based on the heatmap, there is a moderate to strong positive correlation between past minor offenses and crime. This indicated that individuals with a history of minor offenses may be more likely to commit more serious crimes, as indicated by their higher rates of total convictions and arrests. Again, it’s important know that this correlation does not necessarily imply causal relationships, and further analysis is needed to determine the nature of these relationships.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;p_charges&quot;</span><span class="p">,</span><span class="s2">&quot;p_pending_charge&quot;</span><span class="p">,</span><span class="s2">&quot;total_convictions&quot;</span><span class="p">,</span><span class="s2">&quot;p_arrest&quot;</span><span class="p">]</span>
+<span class="n">correlation_coefs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">crime_data</span><span class="p">[</span><span class="n">columns1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation_coefs</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;crest&#39;</span><span class="p">,</span>
+            <span class="n">linecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="n">columns1</span><span class="p">,</span> <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">},</span> <span class="n">yticklabels</span><span class="o">=</span><span class="n">columns1</span><span class="p">)</span>
+<span class="n">heatmap</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">heatmap</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/heatmap2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6d3437ebf0a563cd570074cca1305616d4162e990b662bb7d700b3d0b6bb3fb8.png" src="_images/6d3437ebf0a563cd570074cca1305616d4162e990b662bb7d700b3d0b6bb3fb8.png" />
+</div>
+</div>
+<p>We also use histograms to observe the overall pattern and distribution of variables. Since all the histograms below are right-skewed, we need to transform these variables to create a more symmetrical distribution, which can improve model performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">hist_features1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;p_charges&quot;</span><span class="p">,</span><span class="s2">&quot;p_pending_charge&quot;</span><span class="p">,</span><span class="s2">&quot;total_convictions&quot;</span><span class="p">,</span><span class="s2">&quot;p_arrest&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hist_features1</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">k</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="o">%</span><span class="k">2</span>].set_title(feature)
+    <span class="n">crime_data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">k</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="o">%</span><span class="k">2</span>], color = &#39;lightgreen&#39;)
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/histogram2.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e783e7a0fb9241ca76b15897d84c774e4a308317961498d59acba4f269827dcb.png" src="_images/e783e7a0fb9241ca76b15897d84c774e4a308317961498d59acba4f269827dcb.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="feature-engineer-try-to-understand-the-future-engineer-do-and-try-to-add-some-more-feature-engine-that-is-useful-for-random-forest-model">
+<h2>Feature Engineer - try to understand the future engineer do, and try to add some more feature engine that is useful for random forest model<a class="headerlink" href="#feature-engineer-try-to-understand-the-future-engineer-do-and-try-to-add-some-more-feature-engine-that-is-useful-for-random-forest-model" title="Permalink to this heading">#</a></h2>
+<p>Feature engineering is the process of selecting, extracting, and transforming raw data into features that can be used to train a machine learning model. The goal of feature engineering is to improve the accuracy and efficiency of a model by creating meaningful representations of the input data.</p>
+<section id="split-screening-date-to-year-month-and-day">
+<h3>split screening_date to year, month and day<a class="headerlink" href="#split-screening-date-to-year-month-and-day" title="Permalink to this heading">#</a></h3>
+<p>Based on the findings in the book “IS CRIME SEASONAL” by Carolyn Rebecca Block, published in January 1984, it was observed that criminal activity tends to increase during the summer months, with the exception of December. To better understand this phenomenon and potentially identify any patterns or trends in criminal activity, we decided to perform an analysis on the feature screening_date.</p>
+<p>In order to gain deeper insights into the data, we decided to split the feature screening_date into three separate components: year, month, and day. This allowed us to more effectively identify any correlations between the timing of criminal activity and other factors such as weather patterns or societal events.</p>
+<p>The results of this data splitting revealed several interesting trends. For example, we found that criminal activity tended to be highest during the summer months, with a peak in the month of July. Additionally, we observed that certain types of crime were more prevalent during specific times of the year, such as property crimes being more common in the winter months.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">screening_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">crime_data</span><span class="o">.</span><span class="n">screening_date</span><span class="p">)</span>
+<span class="n">crime_data</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">screening_date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+<span class="n">crime_data</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">screening_date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+<span class="n">crime_data</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">screening_date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
+<span class="n">crime_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="s1">&#39;screening_date&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crime_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>person_id</th>
+      <th>sex</th>
+      <th>race</th>
+      <th>age_at_current_charge</th>
+      <th>age_at_first_charge</th>
+      <th>p_charges</th>
+      <th>p_incarceration</th>
+      <th>p_probation</th>
+      <th>p_juv_fel_count</th>
+      <th>p_felprop_viol</th>
+      <th>...</th>
+      <th>felony_two_year</th>
+      <th>violent_two_year</th>
+      <th>drug_six_month</th>
+      <th>property_six_month</th>
+      <th>misdemeanor_six_month</th>
+      <th>felony_six_month</th>
+      <th>violent_six_month</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>African-American</td>
+      <td>45</td>
+      <td>19</td>
+      <td>39</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>3</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>101</td>
+      <td>1</td>
+      <td>Hispanic</td>
+      <td>42</td>
+      <td>26</td>
+      <td>9</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2013</td>
+      <td>1</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>101</td>
+      <td>1</td>
+      <td>Hispanic</td>
+      <td>43</td>
+      <td>26</td>
+      <td>15</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1015</td>
+      <td>1</td>
+      <td>African-American</td>
+      <td>35</td>
+      <td>19</td>
+      <td>47</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>3</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1016</td>
+      <td>1</td>
+      <td>Other</td>
+      <td>27</td>
+      <td>18</td>
+      <td>11</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>3</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2013</td>
+      <td>4</td>
+      <td>15</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 54 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="convert-string-features-to-integer">
+<h3>Convert string features to integer<a class="headerlink" href="#convert-string-features-to-integer" title="Permalink to this heading">#</a></h3>
+<p>The feature “race” in our dataset was initially stored as a string, which could cause issues when analyzing and modeling the data. To address this, we converted the “race” feature to an integer data type, where each unique race was assigned a specific number. The purpose of this conversion was to make the data more standardized and easier to process.</p>
+<p>By converting the “race” feature to an integer, we were able to perform statistical analysis and machine learning algorithms more efficiently. This transformation allowed us to compare and contrast different races in a consistent and meaningful way. Furthermore, by using numerical values to represent the races, we were able to reduce the risk of data entry errors and enhance the accuracy of our analyses.</p>
+<p>The resulting plots after the conversion of the “race” feature provide a visual representation of the distribution of each race in our dataset. These plots enable us to gain insights into the prevalence of each race in our data, as well as identify any potential biases or imbalances that may exist. Overall, the conversion of the “race” feature to an integer was a critical step in preparing our data for further analysis and modeling.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crime_data</span><span class="o">.</span><span class="n">race</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     African-American
+1             Hispanic
+2             Hispanic
+3     African-American
+4                Other
+5                Other
+6             Hispanic
+7     African-American
+8             Hispanic
+9     African-American
+10    African-American
+11    African-American
+12    African-American
+13           Caucasian
+14    African-American
+15    African-American
+16    African-American
+17    African-American
+18    African-American
+19           Caucasian
+Name: race, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">race_dict</span> <span class="o">=</span> <span class="n">crime_data</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">crime_data</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">crime_data</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">race_dict</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crime_data</span><span class="o">.</span><span class="n">race</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     0
+1     1
+2     1
+3     0
+4     2
+5     2
+6     1
+7     0
+8     1
+9     0
+10    0
+11    0
+12    0
+13    3
+14    0
+15    0
+16    0
+17    0
+18    0
+19    3
+Name: race, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Group the data by race and count the occurrences</span>
+<span class="n">race_count</span> <span class="o">=</span> <span class="n">crime_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;race&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+<span class="c1"># Plot the distribution of races using a bar chart</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">race_count</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">race_count</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Race&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Races in Crime Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/figure1.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/810eb68f0a0d6265fdf5d7d1ce09ed5c4789680a3d27c4f33048d8ae05a92b91.png" src="_images/810eb68f0a0d6265fdf5d7d1ce09ed5c4789680a3d27c4f33048d8ae05a92b91.png" />
+</div>
+</div>
+</section>
+<section id="convert-long-tail-distribution-to-normal-distribution-by-log-transformation">
+<h3>Convert long tail distribution to normal distribution by log transformation.<a class="headerlink" href="#convert-long-tail-distribution-to-normal-distribution-by-log-transformation" title="Permalink to this heading">#</a></h3>
+<p>During the exploratory data analysis phase, we noticed that some of our dataset’s features had a long-tail distribution. Long-tailed distributions can cause issues with statistical analysis and modeling, as they may violate the assumptions of normality and homoscedasticity. Therefore, to address this issue, we applied a log-transformation to these features.</p>
+<p>The log-transformation is a common technique used to normalize long-tailed data and make it more suitable for analysis. By applying a logarithmic function to the data, we were able to compress the values of the long-tailed distribution and obtain a more normally distributed feature.</p>
+<p>However, applying the log function to zero-valued data can cause errors, as the logarithmic function is undefined at zero. Therefore, we added a small constant of 1 to all features to ensure that there were no zero values in our dataset. This prevented any errors from occurring during the log- transformation process.</p>
+<p>To illustrate the effects of the log-transformation, we created histograms of two example features before and after the transformation. The histograms show the distribution of the feature values before and after applying the log function, respectively. As seen in the histograms, the log-transformation effectively reduced the skewness of the distribution and made it more symmetric and normally distributed. This normalization will enable us to perform more accurate statistical analyses and develop better predictive models based on the transformed features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#Figures before log trans</span>
+<span class="n">hist_features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;total_convictions&quot;</span><span class="p">,</span> <span class="s2">&quot;p_pending_charge&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hist_features</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+    <span class="n">crime_data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/figure2.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ac00405fb571711ab3c4ea8307bc5c1689c28cb30f640d1168ae5e9f79123b78.png" src="_images/ac00405fb571711ab3c4ea8307bc5c1689c28cb30f640d1168ae5e9f79123b78.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># figures after log transform</span>
+<span class="n">crime_data</span><span class="p">[</span><span class="s2">&quot;total_convictions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">crime_data</span><span class="p">[</span><span class="s2">&quot;total_convictions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">crime_data</span><span class="p">[</span><span class="s2">&quot;p_pending_charge&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">crime_data</span><span class="p">[</span><span class="s2">&quot;p_pending_charge&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">hist_features</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;total_convictions&quot;</span><span class="p">,</span> <span class="s2">&quot;p_pending_charge&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hist_features</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+    <span class="n">crime_data</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/figure3.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/79328618d58abf652f720cdc27d8afbb13fbacdbf84bf2da93fcfa550cfaa3d1.png" src="_images/79328618d58abf652f720cdc27d8afbb13fbacdbf84bf2da93fcfa550cfaa3d1.png" />
+</div>
+</div>
+</section>
+<section id="remove-features-with-low-standard-deviation">
+<h3>Remove features with low standard deviation<a class="headerlink" href="#remove-features-with-low-standard-deviation" title="Permalink to this heading">#</a></h3>
+<p>When working with machine learning models, it is important to identify and remove features that have little to no impact on the output or target variable. One way to do this is by analyzing the standard deviation of each feature in the dataset. Standard deviation is a measure of how spread out the data is from the mean value. If a feature has a small standard deviation, it means that the values are clustered closely around the mean, and there is not much variation in the data.</p>
+<p>By computing the standard deviation of all features in our dataset, we were able to identify which features had small standard deviations. These features are often referred to as low-variance features. Low-variance features are barely separable and can lead to overfitting in machine learning models. Overfitting occurs when a model becomes too complex and captures the noise in the data rather than the underlying patterns, leading to poor performance on new data.</p>
+<p>To address this issue, we chose to remove the low-variance features from our dataset before training machine learning models. By doing so, we were able to improve the accuracy and generalizability of our models, as well as reduce the risk of overfitting. This process of identifying and removing low- variance features is known as feature selection and is a crucial step in preparing data for machine learning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;general_two_year&quot;</span><span class="p">,</span> <span class="s2">&quot;general_six_month&quot;</span><span class="p">,</span> <span class="s2">&quot;drug_two_year&quot;</span><span class="p">,</span> <span class="s2">&quot;property_two_year&quot;</span><span class="p">,</span> <span class="s2">&quot;misdemeanor_two_year&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;felony_two_year&quot;</span><span class="p">,</span> <span class="s2">&quot;violent_two_year&quot;</span><span class="p">,</span> <span class="s2">&quot;drug_six_month&quot;</span><span class="p">,</span> <span class="s2">&quot;property_six_month&quot;</span><span class="p">,</span> <span class="s2">&quot;misdemeanor_six_month&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;felony_six_month&quot;</span><span class="p">,</span> <span class="s2">&quot;violent_six_month&quot;</span><span class="p">]</span>
+
+<span class="n">features_columns</span> <span class="o">=</span> <span class="n">crime_data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">prepare_features</span><span class="p">(</span><span class="n">crime_data</span><span class="p">,</span> <span class="n">label_columns</span><span class="p">,</span> <span class="n">features_columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># #Original cell</span>
+<span class="c1"># label_columns = [&quot;general_two_year&quot;, &quot;general_six_month&quot;, &quot;drug_two_year&quot;, &quot;property_two_year&quot;, &quot;misdemeanor_two_year&quot;,</span>
+<span class="c1">#                  &quot;felony_two_year&quot;, &quot;violent_two_year&quot;, &quot;drug_six_month&quot;, &quot;property_six_month&quot;, &quot;misdemeanor_six_month&quot;,</span>
+<span class="c1">#                  &quot;felony_six_month&quot;, &quot;violent_six_month&quot;]</span>
+<span class="c1"># drop_features = [&quot;person_id&quot;] + label_columns</span>
+<span class="c1"># features_columns = crime_data.columns.tolist()</span>
+<span class="c1"># for x in drop_features:</span>
+<span class="c1">#     features_columns.remove(x)</span>
+<span class="c1"># x = crime_data.loc[:, features_columns]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sex                       0.334681
+race                      1.379372
+age_at_current_charge    11.008898
+age_at_first_charge       8.868941
+p_charges                11.223027
+p_incarceration           0.477588
+p_probation               1.481047
+p_juv_fel_count           0.708095
+p_felprop_viol            2.217787
+p_murder                  0.174411
+p_felassault              0.957249
+p_misdeassault            1.014631
+p_sex_offense             0.516139
+p_weapon                  0.632346
+p_fta_two_year            0.598511
+p_fta_two_year_plus       0.098334
+current_violence          0.499363
+current_violence20        0.255402
+p_pending_charge          1.100237
+p_felony                  3.290550
+p_misdemeanor             4.294165
+p_violence                3.323527
+total_convictions         0.904258
+p_arrest                  6.246491
+p_property                4.150365
+p_traffic                 0.602952
+p_drug                    3.691064
+p_dui                     0.998764
+p_domestic                0.166743
+p_stalking                0.168437
+p_voyeurism               1.335258
+p_fraud                   0.168437
+p_stealing                3.833058
+p_trespass                1.800541
+six_month                 0.476296
+one_year                  0.500124
+three_year                0.419812
+five_year                 0.316798
+year                      0.379648
+month                     3.678154
+day                       8.534939
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## choose top 35 features with higher sd</span>
+<span class="n">select_feature_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">35</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+<span class="n">select_feature</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">select_feature_num</span><span class="p">]</span>
+<span class="n">drop_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">features_columns</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">select_feature</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">drop_features</span><span class="p">)</span>  <span class="c1"># print removed features</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">select_feature</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sex                       0.334681
+race                      1.379372
+age_at_current_charge    11.008898
+age_at_first_charge       8.868941
+p_charges                11.223027
+p_incarceration           0.477588
+p_probation               1.481047
+p_juv_fel_count           0.708095
+p_felprop_viol            2.217787
+p_murder                  0.174411
+p_felassault              0.957249
+p_misdeassault            1.014631
+p_sex_offense             0.516139
+p_weapon                  0.632346
+p_fta_two_year            0.598511
+p_fta_two_year_plus       0.098334
+current_violence          0.499363
+current_violence20        0.255402
+p_pending_charge          1.100237
+p_felony                  3.290550
+p_misdemeanor             4.294165
+p_violence                3.323527
+total_convictions         0.904258
+p_arrest                  6.246491
+p_property                4.150365
+p_traffic                 0.602952
+p_drug                    3.691064
+p_dui                     0.998764
+p_domestic                0.166743
+p_stalking                0.168437
+p_voyeurism               1.335258
+p_fraud                   0.168437
+p_stealing                3.833058
+p_trespass                1.800541
+six_month                 0.476296
+one_year                  0.500124
+three_year                0.419812
+five_year                 0.316798
+year                      0.379648
+month                     3.678154
+day                       8.534939
+dtype: float64
+[&#39;p_fraud&#39;, &#39;current_violence20&#39;, &#39;p_murder&#39;, &#39;p_fta_two_year_plus&#39;, &#39;p_stalking&#39;, &#39;p_domestic&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">())</span> <span class="c1"># sd of features keeped</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p_charges                11.223027
+age_at_current_charge    11.008898
+age_at_first_charge       8.868941
+day                       8.534939
+p_arrest                  6.246491
+p_misdemeanor             4.294165
+p_property                4.150365
+p_stealing                3.833058
+p_drug                    3.691064
+month                     3.678154
+p_violence                3.323527
+p_felony                  3.290550
+p_felprop_viol            2.217787
+p_trespass                1.800541
+p_probation               1.481047
+race                      1.379372
+p_voyeurism               1.335258
+p_pending_charge          1.100237
+p_misdeassault            1.014631
+p_dui                     0.998764
+p_felassault              0.957249
+total_convictions         0.904258
+p_juv_fel_count           0.708095
+p_weapon                  0.632346
+p_traffic                 0.602952
+p_fta_two_year            0.598511
+p_sex_offense             0.516139
+one_year                  0.500124
+current_violence          0.499363
+p_incarceration           0.477588
+six_month                 0.476296
+three_year                0.419812
+year                      0.379648
+sex                       0.334681
+five_year                 0.316798
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="remove-sparse-features">
+<h3>remove sparse features<a class="headerlink" href="#remove-sparse-features" title="Permalink to this heading">#</a></h3>
+<p>Removing the sparse features was a crucial step in preparing our dataset for further analysis and modeling. In our dataset, some features contain mostly zero values, with only a small number of non-zero values. These sparse features can negatively impact the performance of our machine learning models and the interpretability of our analyses. Therefore, we decided to remove these sparse features from our dataset.</p>
+<p>To identify the sparse features, we calculated the percentage of zero values for each feature and created a plot to visualize this information. Any feature with a percentage of zero values larger than 90% was considered too sparse and was removed from our dataset.</p>
+<p>Based on this criterion, we identified five features that were too sparse: “p_voyeurism”, “p_juv_fel_count”, “p_traffic”, “p_fta_two_year”, and “p_sex_offense”. These features were removed from our dataset, leaving us with 30 features.</p>
+<p>By removing the sparse features, we were able to reduce the dimensionality of our dataset, which can improve the performance of machine learning algorithms and reduce overfitting. Furthermore, by focusing on the features with more non-zero values, we can gain insights into the important factors that contribute to the outcome variable in our analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_sparse_r</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="c1"># if the percentage of zeros is larger than 0.9 then remove.</span>
+
+<span class="c1"># def remove_sparse_features(data, feature_r):</span>
+<span class="c1">#     x = data</span>
+<span class="c1">#     x_num = x.shape[0]</span>
+<span class="c1">#     feature_num = x.shape[1]</span>
+<span class="c1">#     feature_no_zero_num = np.sum([x == 0], 1)[0]</span>
+<span class="c1">#     feature_list =  feature_no_zero_num / x_num</span>
+<span class="c1">#     select_feature_sparse = x.columns[feature_list &lt; feature_r]</span>
+<span class="c1">#     drop_feature_sparse = x.columns[feature_list &gt; feature_r]</span>
+<span class="c1">#     x = x.loc[:, select_feature_sparse]</span>
+<span class="c1">#     return feature_list, x, drop_feature_sparse</span>
+
+<span class="n">feature_sparse_r_list</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">drop_feature_sparse</span>  <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">remove_sparse_features</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">feature_sparse_r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">feature_sparse_r_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">feature_sparse_r_list</span> <span class="o">&lt;</span> <span class="n">feature_sparse_r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">drop_feature_sparse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00000000e+00 0.00000000e+00 5.11770727e-04 0.00000000e+00
+ 8.18833163e-03 2.04708291e-01 4.18116684e-01 4.77993859e-01
+ 4.19140225e-01 0.00000000e+00 4.12487206e-01 4.85158649e-01
+ 6.00818833e-01 6.71443193e-01 5.36335722e-01 5.75230297e-01
+ 9.97952917e-01 3.69498465e-01 6.00307062e-01 8.51074719e-01
+ 7.41555783e-01 1.23336745e-01 9.54452405e-01 8.98157625e-01
+ 9.26305015e-01 9.01740020e-01 9.89764585e-01 4.97952917e-01
+ 4.72364381e-01 6.48413511e-01 6.52507677e-01 2.28249744e-01
+ 0.00000000e+00 1.28454452e-01 1.13101331e-01]
+[ True  True  True  True  True  True  True  True  True  True  True  True
+  True  True  True  True False  True  True  True  True  True False  True
+ False False False  True  True  True  True  True  True  True  True]
+Index([&#39;p_voyeurism&#39;, &#39;p_juv_fel_count&#39;, &#39;p_traffic&#39;, &#39;p_fta_two_year&#39;,
+       &#39;p_sex_offense&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Original cell</span>
+
+<span class="c1"># x_num = x.shape[0]</span>
+<span class="c1"># feature_num = x.shape[1]</span>
+<span class="c1"># feature_no_zero_num = np.sum([x == 0], 1)[0]</span>
+<span class="c1"># feature_sparse_r = 0.9 # if the percentage of zeros is larger than 0.9 then remove.</span>
+<span class="c1"># feature_sparse_r_list =  feature_no_zero_num/x_num</span>
+<span class="c1"># print(feature_sparse_r_list)</span>
+<span class="c1"># print(feature_sparse_r_list &lt; feature_sparse_r)</span>
+<span class="c1"># # features kept</span>
+<span class="c1"># select_feature_sparse = x.columns[feature_sparse_r_list &lt; feature_sparse_r]</span>
+<span class="c1"># # features removed</span>
+<span class="c1"># drop_feature_sparse = x.columns[feature_sparse_r_list &gt; feature_sparse_r]</span>
+<span class="c1"># print(drop_feature_sparse)</span>
+<span class="c1"># x = x.loc[:, select_feature_sparse]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="outliers-detection">
+<h3>Outliers detection<a class="headerlink" href="#outliers-detection" title="Permalink to this heading">#</a></h3>
+<p>In data analysis, outliers are data points that deviate significantly from the rest of the data. These values can have a disproportionate effect on statistical measures such as the mean and standard deviation, and can therefore distort the analysis and modeling results. Hence, it is important to identify and handle outliers appropriately.
+To address this, we performed a z-score analysis on our dataset to identify any outliers. Z-score analysis involves standardizing the data by subtracting the mean and dividing by the standard deviation. Any data point with a z-score greater than 3 is considered an outlier.</p>
+<p>To handle these outliers, we chose to change their values to have a z-score of exactly 3. This approach is known as winsorizing, which involves capping the extreme values of the data to a predetermined value. By setting the z-score of outliers to 3, we are effectively limiting the effect of these values on the analysis and modeling results, while still preserving their relative position within the data.
+The purpose of this action is to improve the accuracy and robustness of our data analysis and modeling. Outliers can skew the results of statistical measures, such as correlation coefficients and regression analyses, which can lead to incorrect conclusions and predictions. By handling outliers appropriately, we can ensure that our models are based on reliable and meaningful data.</p>
+<p>Furthermore, identifying outliers and handling them appropriately is an important step in preparing the data for machine learning algorithms. Outliers can have a significant impact on the performance of machine learning models, as they can cause overfitting or underfitting, and lead to poor gener- alization. Therefore, removing or modifying outliers can improve the accuracy and generalization performance of the machine learning models.</p>
+<p>In conclusion, identifying and handling outliers is an important step in data analysis and modeling. By capping the z-scores of outliers to 3, we are preserving the relative position of these data points while minimizing their impact on the analysis and modeling results. This helps to ensure that our models are based on reliable and meaningful data, and can improve their accuracy and generalization performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find features with outliers</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="n">outlier_features_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;p_charges&quot;</span><span class="p">,</span><span class="s2">&quot;p_arrest&quot;</span><span class="p">,</span><span class="s2">&quot;p_misdemeanor&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;p_property&quot;</span><span class="p">,</span><span class="s2">&quot;p_stealing&quot;</span><span class="p">,</span><span class="s2">&quot;p_drug&quot;</span><span class="p">,</span><span class="s2">&quot;p_violence&quot;</span><span class="p">,</span><span class="s2">&quot;p_felony&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;p_felprop_viol&quot;</span><span class="p">,</span><span class="s2">&quot;p_trespass&quot;</span><span class="p">,</span><span class="s2">&quot;p_probation&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;p_misdeassault&quot;</span><span class="p">,</span><span class="s2">&quot;p_dui&quot;</span><span class="p">,</span><span class="s2">&quot;p_felassault&quot;</span><span class="p">,</span><span class="s2">&quot;p_weapon&quot;</span><span class="p">]</span>
+
+
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">remove_outliers</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">outlier_features_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         p_charges  age_at_current_charge  age_at_first_charge          day  \
+count  1954.000000            1954.000000          1954.000000  1954.000000   
+mean     11.228762              31.971853            23.956499    15.436540   
+std      11.223027              11.008898             8.868941     8.534939   
+min       2.000000              18.000000             0.000000     1.000000   
+25%       4.000000              23.000000            18.000000     8.000000   
+50%       8.000000              29.000000            20.000000    16.000000   
+75%      14.000000              39.000000            27.000000    22.000000   
+max     218.000000              69.000000            60.000000    31.000000   
+
+          p_arrest  p_misdemeanor   p_property   p_stealing       p_drug  \
+count  1954.000000    1954.000000  1954.000000  1954.000000  1954.000000   
+mean      5.907881       3.303480     2.301433     1.961617     2.432446   
+std       6.246491       4.294165     4.150365     3.833058     3.691064   
+min       0.000000       0.000000     0.000000     0.000000     0.000000   
+25%       2.000000       1.000000     0.000000     0.000000     0.000000   
+50%       3.000000       2.000000     1.000000     1.000000     1.000000   
+75%       7.000000       4.000000     3.000000     2.000000     3.000000   
+max      46.000000      57.000000    50.000000    50.000000    29.000000   
+
+             month  ...  total_convictions     p_weapon     one_year  \
+count  1954.000000  ...        1954.000000  1954.000000  1954.000000   
+mean      5.126407  ...           1.426610     0.169396     0.502047   
+std       3.678154  ...           0.904258     0.632346     0.500124   
+min       1.000000  ...           0.000000     0.000000     0.000000   
+25%       2.000000  ...           0.693147     0.000000     0.000000   
+50%       4.000000  ...           1.386294     0.000000     1.000000   
+75%       9.000000  ...           2.079442     0.000000     1.000000   
+max      12.000000  ...           4.110874     9.000000     1.000000   
+
+       current_violence  p_incarceration    six_month   three_year  \
+count       1954.000000      1954.000000  1954.000000  1954.000000   
+mean           0.527636         0.351586     0.347492     0.771750   
+std            0.499363         0.477588     0.476296     0.419812   
+min            0.000000         0.000000     0.000000     0.000000   
+25%            0.000000         0.000000     0.000000     1.000000   
+50%            1.000000         0.000000     0.000000     1.000000   
+75%            1.000000         1.000000     1.000000     1.000000   
+max            1.000000         1.000000     1.000000     1.000000   
+
+              year          sex    five_year  
+count  1954.000000  1954.000000  1954.000000  
+mean   2013.174514     0.871546     0.886899  
+std       0.379648     0.334681     0.316798  
+min    2013.000000     0.000000     0.000000  
+25%    2013.000000     1.000000     1.000000  
+50%    2013.000000     1.000000     1.000000  
+75%    2013.000000     1.000000     1.000000  
+max    2014.000000     1.000000     1.000000  
+
+[8 rows x 30 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find features with outliers</span>
+<span class="c1"># print(x.describe())</span>
+<span class="c1"># outlier_features_list = [&quot;p_charges&quot;,&quot;p_arrest&quot;,&quot;p_misdemeanor&quot;,</span>
+<span class="c1">#                          &quot;p_property&quot;,&quot;p_stealing&quot;,&quot;p_drug&quot;,&quot;p_violence&quot;,&quot;p_felony&quot;,</span>
+<span class="c1">#                          &quot;p_felprop_viol&quot;,&quot;p_trespass&quot;,&quot;p_probation&quot;,</span>
+<span class="c1">#                          &quot;p_misdeassault&quot;,&quot;p_dui&quot;,&quot;p_felassault&quot;,&quot;p_weapon&quot;]</span>
+<span class="c1"># # change the values of outliers.</span>
+<span class="c1"># for feature in outlier_features_list:</span>
+<span class="c1">#     feature_data = x[feature]</span>
+<span class="c1">#     mean = x[feature].mean()</span>
+<span class="c1">#     std = x[feature].std()</span>
+<span class="c1">#     mean_3_std = mean + 3 * std</span>
+<span class="c1">#     x.loc[x[feature] &gt; mean_3_std, feature] = mean_3_std</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>p_charges</th>
+      <th>age_at_current_charge</th>
+      <th>age_at_first_charge</th>
+      <th>day</th>
+      <th>p_arrest</th>
+      <th>p_misdemeanor</th>
+      <th>p_property</th>
+      <th>p_stealing</th>
+      <th>p_drug</th>
+      <th>month</th>
+      <th>...</th>
+      <th>total_convictions</th>
+      <th>p_weapon</th>
+      <th>one_year</th>
+      <th>current_violence</th>
+      <th>p_incarceration</th>
+      <th>six_month</th>
+      <th>three_year</th>
+      <th>year</th>
+      <th>sex</th>
+      <th>five_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>...</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+      <td>1954.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>10.996687</td>
+      <td>31.971853</td>
+      <td>23.956499</td>
+      <td>15.436540</td>
+      <td>5.786629</td>
+      <td>3.205290</td>
+      <td>2.120191</td>
+      <td>1.788900</td>
+      <td>2.330484</td>
+      <td>5.126407</td>
+      <td>...</td>
+      <td>1.426610</td>
+      <td>0.141177</td>
+      <td>0.502047</td>
+      <td>0.527636</td>
+      <td>0.351586</td>
+      <td>0.347492</td>
+      <td>0.771750</td>
+      <td>2013.174514</td>
+      <td>0.871546</td>
+      <td>0.886899</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>9.619147</td>
+      <td>11.008898</td>
+      <td>8.868941</td>
+      <td>8.534939</td>
+      <td>5.781292</td>
+      <td>3.737095</td>
+      <td>3.186592</td>
+      <td>2.883842</td>
+      <td>3.242971</td>
+      <td>3.678154</td>
+      <td>...</td>
+      <td>0.904258</td>
+      <td>0.448368</td>
+      <td>0.500124</td>
+      <td>0.499363</td>
+      <td>0.477588</td>
+      <td>0.476296</td>
+      <td>0.419812</td>
+      <td>0.379648</td>
+      <td>0.334681</td>
+      <td>0.316798</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2.000000</td>
+      <td>18.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>2013.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>4.000000</td>
+      <td>23.000000</td>
+      <td>18.000000</td>
+      <td>8.000000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>2.000000</td>
+      <td>...</td>
+      <td>0.693147</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>2013.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>8.000000</td>
+      <td>29.000000</td>
+      <td>20.000000</td>
+      <td>16.000000</td>
+      <td>3.000000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>4.000000</td>
+      <td>...</td>
+      <td>1.386294</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>2013.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>14.000000</td>
+      <td>39.000000</td>
+      <td>27.000000</td>
+      <td>22.000000</td>
+      <td>7.000000</td>
+      <td>4.000000</td>
+      <td>3.000000</td>
+      <td>2.000000</td>
+      <td>3.000000</td>
+      <td>9.000000</td>
+      <td>...</td>
+      <td>2.079442</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>2013.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>44.897844</td>
+      <td>69.000000</td>
+      <td>60.000000</td>
+      <td>31.000000</td>
+      <td>24.647354</td>
+      <td>16.185976</td>
+      <td>14.752527</td>
+      <td>13.460790</td>
+      <td>13.505639</td>
+      <td>12.000000</td>
+      <td>...</td>
+      <td>4.110874</td>
+      <td>2.066435</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>2014.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 30 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="models-using-random-forest-determine-the-features-that-have-the-biggest-influence-on-committing-crime-again">
+<h2>Models - Using Random Forest, determine the features that have the biggest influence on committing crime again<a class="headerlink" href="#models-using-random-forest-determine-the-features-that-have-the-biggest-influence-on-committing-crime-again" title="Permalink to this heading">#</a></h2>
+<p>Random Forest model is a powerful tool for predicting the features that have the biggest influence on committing a crime again and testing assumptions related to age and prior criminal history. By identifying the most important predictors and their relationships with recidivism, we can develop targeted interventions and prevention strategies that address the underlying risk factors and reduce the likelihood of reoffending.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">f1_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">import</span> <span class="nn">random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We first need performs a grid search over hyperparameters to find the best model for a random forest classifier.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="c1"># set the seed for the random number generator to a fixed value</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123456</span><span class="p">)</span>
+<span class="c1"># calculate the number of rows to use for training (70% of the data)</span>
+<span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">crime_data</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.7</span><span class="p">)</span>
+<span class="c1"># define a grid of hyperparameters to search over</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]}</span> 
+<span class="c1"># get the length of the n_estimators and max_depth hyperparameter lists </span>
+<span class="n">n_estimators_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">param_grid</span><span class="p">[</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">])</span>
+<span class="n">max_depth</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">param_grid</span><span class="p">[</span><span class="s2">&quot;max_depth&quot;</span><span class="p">])</span>
+<span class="c1"># create a KFold cross-validation object with 2 splits</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">666</span><span class="p">)</span>
+<span class="c1"># select the label column to predict</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">label_columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># split the data into training and testing sets</span>
+<span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">num</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">crime_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">num</span><span class="p">,</span> <span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> 
+<span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">num</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">crime_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">num</span><span class="p">:,</span> <span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="c1"># create a random forest classifier model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+<span class="c1"># perform a grid search over the hyperparameters to find the best model</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+<span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+<span class="c1"># reshape the test scores into a 2D array</span>
+<span class="n">test_score</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;mean_test_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n_estimators_len</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.59429825 0.59576023 0.60160819 0.59283626 0.58991228]
+ [0.59429825 0.59210526 0.60526316 0.59795322 0.6001462 ]
+ [0.60526316 0.61111111 0.61038012 0.60818713 0.60818713]
+ [0.5994152  0.60599415 0.60453216 0.60964912 0.60672515]
+ [0.57894737 0.59868421 0.60745614 0.60745614 0.60380117]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, we need to create a 3D visualization to visualize our hyperparameter selection that shows the relationship between the model’s per- formance (as measured by test_score) and different values of max_depth and n_estimators. By plotting the test_score on the z-axis and max_depth and n_estimators on the x and y axes, re- spectively, we can see how changing these hyperparameters affects the model’s performance.
+This can help us choose the best values of max_depth and n_estimators that balance model complexity and accuracy, and avoid overfitting or underfitting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="c1"># Create arrays for the x and y values</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="n">n_estimators_len</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="n">max_depth</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Create a grid from the x and y arrays</span>
+<span class="n">X1</span><span class="p">,</span> <span class="n">Y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+<span class="c1"># Convert test_score to an array</span>
+<span class="n">Z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">test_score</span><span class="p">)</span>
+<span class="c1"># Create a new figure and axis for the 3D plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="c1"># Plot the surface with the x, y, and z values</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span> <span class="n">Y1</span><span class="p">,</span> <span class="n">Z1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">[</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">[</span><span class="s2">&quot;max_depth&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;max_depth&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;figures/figure4.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a546ae3675e1b1de10c530457abc773323de265279784fed592f78f7fd707ac8.png" src="_images/a546ae3675e1b1de10c530457abc773323de265279784fed592f78f7fd707ac8.png" />
+</div>
+</div>
+<p>Finally, we are going to train a Random Forest Classifier model on a dataset and evaluate its performance on a testing set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="c1"># Split the input data into training and testing sets</span>
+<span class="c1"># `num` is the index up to which the training data is used</span>
+<span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">num</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">crime_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="n">num</span><span class="p">,</span> <span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> 
+<span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">num</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">crime_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">num</span><span class="p">:,</span> <span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> 
+<span class="c1"># Create a random forest classifier with 50 trees and a maximum depth of 4 </span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c1"># Train the classifier on the training data</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+<span class="c1"># Predict the labels for the test data using the trained classifier </span>
+<span class="n">test_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span>
+<span class="c1"># Calculate the accuracy of the predictions on the test data</span>
+<span class="n">test_acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">test_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Accuracy is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">test_acc</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test Accuracy is: 0.6388
+</pre></div>
+</div>
+</div>
+</div>
+<p>After training a machine learning model, it is often useful to determine the importance of the features used in the model. This can help to answer questions such as:</p>
+<ul class="simple">
+<li><p>Which features are most important in predicting the target variable?</p></li>
+<li><p>Which features can be safely ignored without significantly affecting the model’s performance?</p></li>
+<li><p>Are there any features that are highly correlated with each other and could be combined or removed to simplify the model?</p></li>
+</ul>
+<p>By analyzing the feature importance outcome, we can identify the most important features that contribute to the model’s performance and potentially simplify the model by eliminating irrelevant or redundant features. We can also gain insights into the underlying patterns and relationships in the data, which can inform future data collection and analysis efforts.
+In this example, the feature importance scores are shown in descending order, with the most important feature at the top of the list. The scores are normalized so that they sum to 1.0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_names</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+<span class="n">imporfeatures_rank</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">feature_names</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">clf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imporfeatures_rank</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;age_at_current_charge&#39;, 0.1418),
+ (&#39;p_misdemeanor&#39;, 0.1037),
+ (&#39;age_at_first_charge&#39;, 0.084),
+ (&#39;p_charges&#39;, 0.0708),
+ (&#39;p_pending_charge&#39;, 0.069),
+ (&#39;total_convictions&#39;, 0.0523),
+ (&#39;three_year&#39;, 0.0514),
+ (&#39;p_drug&#39;, 0.0407),
+ (&#39;p_arrest&#39;, 0.0386),
+ (&#39;day&#39;, 0.0354),
+ (&#39;one_year&#39;, 0.0342),
+ (&#39;p_dui&#39;, 0.0294),
+ (&#39;p_violence&#39;, 0.0254),
+ (&#39;race&#39;, 0.023),
+ (&#39;p_stealing&#39;, 0.0223),
+ (&#39;p_probation&#39;, 0.0188),
+ (&#39;p_property&#39;, 0.0165),
+ (&#39;month&#39;, 0.0162),
+ (&#39;p_felony&#39;, 0.0152),
+ (&#39;p_felassault&#39;, 0.0141),
+ (&#39;p_felprop_viol&#39;, 0.0138),
+ (&#39;p_incarceration&#39;, 0.0136),
+ (&#39;p_misdeassault&#39;, 0.0118),
+ (&#39;six_month&#39;, 0.0101),
+ (&#39;p_trespass&#39;, 0.0091),
+ (&#39;sex&#39;, 0.0081),
+ (&#39;current_violence&#39;, 0.0032),
+ (&#39;year&#39;, 0.0025),
+ (&#39;p_weapon&#39;, 0.0022)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The outcome of our model predicted that age and number of prior misdemeanor are the features that will cause a person to commit another crime in the future. Higher number of prior misdemeanor will have higher chance to commit a crime again. And a younger age for a person committed his, her, or their first crime will have higher chance to commit a crime again in the future.</p>
+<section id="we-will-discussed-about-the-results-and-interested-findings-further-from-our-model-in-the-main-ipynb">
+<h3>We will discussed about the results and interested findings further from our model in the main.ipynb<a class="headerlink" href="#we-will-discussed-about-the-results-and-interested-findings-further-from-our-model-in-the-main-ipynb" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "developer"
+        },
+        kernelOptions: {
+            name: "developer",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'developer'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authors-andy-zuo-lia-yang-helen-tan">Authors: Andy Zuo, Lia Yang, Helen Tan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis-eda">Exploratory Data Analysis(EDA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-add-more-data-cleaning">Data Cleaning - add more data cleaning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-visualization-add-more-visualizations-based-on-the-two-assumption-at-main-ipynb-and-add-description-for-each-visualization-such-as-purpose-and-the-visualization-anaylysis-and-findings">Data visualization - Add more visualizations based on the two assumption at Main.ipynb and add description for each visualization such as purpose and the visualization anaylysis, and findings.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-and-histogram-age-and-crime">Heatmap and Histogram - Age and Crime</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-and-histogram-past-minor-offenses-and-crime">Heatmap and Histogram - Past minor offenses and Crime</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineer-try-to-understand-the-future-engineer-do-and-try-to-add-some-more-feature-engine-that-is-useful-for-random-forest-model">Feature Engineer - try to understand the future engineer do, and try to add some more feature engine that is useful for random forest model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-screening-date-to-year-month-and-day">split screening_date to year, month and day</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-string-features-to-integer">Convert string features to integer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-long-tail-distribution-to-normal-distribution-by-log-transformation">Convert long tail distribution to normal distribution by log transformation.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-features-with-low-standard-deviation">Remove features with low standard deviation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-sparse-features">remove sparse features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers-detection">Outliers detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-using-random-forest-determine-the-features-that-have-the-biggest-influence-on-committing-crime-again">Models - Using Random Forest, determine the features that have the biggest influence on committing crime again</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-discussed-about-the-results-and-interested-findings-further-from-our-model-in-the-main-ipynb">We will discussed about the results and interested findings further from our model in the main.ipynb</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

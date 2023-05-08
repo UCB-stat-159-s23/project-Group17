@@ -1,0 +1,645 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>STAT Project- Group 17: Exploring Crime Trends with Machine Learning &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'main';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="EDAandModel.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="EDAandModel.html">
+                    STAT Project- Group 17: Exploring Crime Trends with Machine Learning
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmain.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/main.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>STAT Project- Group 17: Exploring Crime Trends with Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authors-andy-zuo-joowon-yang-helen">Authors: Andy Zuo, Joowon Yang, Helen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-data-on-a-computer-with-a-python-installation">Download the data on a computer with a python installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose-of-analysis">Purpose of Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-hypothesis">Assumption&amp; Hypothesis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-data">Read the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predict-using-the-random-forest-model">Predict Using the Random Forest Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-selection">Hyperparameter Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-result">Model Result</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author-contributions-section">Author Contributions section</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#helen-tan">Helen Tan</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="stat-project-group-17-exploring-crime-trends-with-machine-learning">
+<h1>STAT Project- Group 17: Exploring Crime Trends with Machine Learning<a class="headerlink" href="#stat-project-group-17-exploring-crime-trends-with-machine-learning" title="Permalink to this heading">#</a></h1>
+<section id="authors-andy-zuo-joowon-yang-helen">
+<h2>Authors: Andy Zuo, Joowon Yang, Helen<a class="headerlink" href="#authors-andy-zuo-joowon-yang-helen" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="download-the-data-on-a-computer-with-a-python-installation">
+<h2>Download the data on a computer with a python installation<a class="headerlink" href="#download-the-data-on-a-computer-with-a-python-installation" title="Permalink to this heading">#</a></h2>
+<p>If you are using a pre-configured setup (eg, in binder), great! You don’t have to download or set up anything.</p>
+<p>Otherwise, to begin, get the data downloaded, by downloading the data file from the public Github repository link below:</p>
+<p><strong><a class="github reference external" href="https://github.com/BeanHam/2019-interpretable-machine-learning/blob/master/broward/data/broward_da">BeanHam/2019-interpretable-machine-learning</a></strong></p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>The Broward County dataset comprises of publicly accessible criminal records, court data, and COMPAS scores originating from Broward County, Florida. The criminal history and demographic details were generated from the raw data provided by ProPublica (Angwin et al., 2016). Probationary history was computed from the public criminal records that were released by the Broward Clerk’s Office.</p>
+<p>By analyzing this dataset, we can make predictions about criminal activities, employ scientific methodologies, and draw conclusions regarding the nature, structure, and potential trends of crimes that may occur in a particular location and timeframe. This analysis involves studying various factors that could potentially impact criminal activities, based on the existing data and information. The findings can provide a significant scientific basis for the development of crime prevention strategies and tactical measures.</p>
+<p>In our data set, there are 42 feature and 12 labels. The 12 labels are “general_two_year”, “general_six_month”, “drug_two_year”, “property_two_year”, “misdemeanor_two_year”, “felony_two_year”, “violent_two_year”,”drug_six_month”, “property_six_month”, “misdemeanor_six_month”, “felony_six_month”, “violent_six_month”. Since all of these labels have discrete binary values, the data set is a classification issue. Any combination of these labels can result in a classification issue, and that issue can either be a binary classification issue or not. All labels and characteristics in the data set are numbers, with the exception of “screening_data” and “race” which are strings. There are no missing data in the data set.</p>
+<section id="purpose-of-analysis">
+<h3>Purpose of Analysis<a class="headerlink" href="#purpose-of-analysis" title="Permalink to this heading">#</a></h3>
+<p>The purpose of analyzing the Broward County dataset is to identify the crucial factors that contribute to the likelihood of an individual committing a crime in the future. Using machine learning techniques, we aim to process various features and predict which features has higher chance causing people to commit future criminal activities. Specifically, we want to identify which feature(s) would make a person with a criminal history more likely to commit another crime. The analysis will provide valuable insights into the key determinants of criminal behavior and aid in the development of effective crime prevention strategies.</p>
+</section>
+<section id="assumption-hypothesis">
+<h3>Assumption&amp; Hypothesis<a class="headerlink" href="#assumption-hypothesis" title="Permalink to this heading">#</a></h3>
+<p>Assumption 1.
+One assumption that age and the chance of committing a crime are related is one supposition we may make for the analysis. Younger people can be more likely to engage in criminal activity because they lack maturity and life experience. Alternately, older people might have more resources and opportunities to commit crimes. As a result, we may investigate the relationship between age and the likelihood of committing a crime and see whether there are any risk factors that could be addressed for prevention based on age. It’s crucial to note that this presumption may not necessarily apply to every person in the Broward County dataset and is based on previous research on the connection between age and criminal activity.</p>
+<p>Assumtion 2.
+Another assumption that there may be a connection between the number of past minor offenses and the chance of committing another crime is another presumption that might be made for the study. A history of criminal activity may make those who have committed more minor offenses in the past more inclined to commit them again. Alternately, people with a lower number of prior misdemeanor offenses might have made a mistake in judgment once and not be as likely to commit crimes in the future. Therefore, we can investigate whether there are any particular patterns or risk factors associated with people who have a higher count of prior misdemeanor offenses, as well as how the number of prior misdemeanor offenses relates to the likelihood of committing another crime. It is crucial to emphasize once more that this presumption may not necessarily apply to every person in the Broward County dataset and is based on previous research on the link between prior criminal history and recidivism.</p>
+</section>
+</section>
+<section id="read-the-data">
+<h2>Read the Data<a class="headerlink" href="#read-the-data" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="exploratory-data-analysis">
+<h2>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this heading">#</a></h2>
+<p>We use heatmap and histogram for exploratory data analysishe. The use of heatmap is to analyze the relationship between variables and reduce redundancy. It shows that age is a factor in criminal behavior, but correlation does not imply causation. The second heatmap show that past minor offenses have a moderate to strong correlation with more serious crimes. Histograms were used to observe the pattern and distribution of variables, and transformation was needed due to the right-skewed distribution. The transformation can improve the model performance.</p>
+</section>
+<section id="predict-using-the-random-forest-model">
+<h2>Predict Using the Random Forest Model<a class="headerlink" href="#predict-using-the-random-forest-model" title="Permalink to this heading">#</a></h2>
+<p>The Random Forest model is a powerful and versatile machine learning algorithm that is well-suited for predicting the features that have the biggest influence on committing a crime again. It is a type of ensemble learning method that combines multiple decision trees to improve the accuracy and stability of the predictions. Random Forest models are particularly effective in dealing with complex and high-dimensional data, which is often the case in criminology and criminal justice research.</p>
+<p>In the context of predicting the features that have the biggest influence on committing a crime again, Random Forest models can be used to identify the most important variables or predictors that are associated with recidivism. These predictors could include demographic characteristics such as age, gender, and race, as well as prior criminal history, employment status, education level, and other social and environmental factors that may increase the risk of reoffending. By identifying these predictors, policymakers and criminal justice practitioners can design targeted interventions and prevention strategies that address the underlying risk factors and reduce the likelihood of recidivism.</p>
+<p>Regarding the correctness of the assumptions related to age and prior criminal history, Random Forest models can be used to test and validate these assumptions by analyzing the relationships between the predictors and the outcome variable (i.e., recidivism). The model can identify the relative importance of each predictor and determine whether age and prior criminal history are significant risk factors for recidivism. By using a machine learning approach, we can account for the complex and non-linear relationships between the predictors and the outcome variable, as well as the potential interactions between them.</p>
+<section id="hyperparameter-selection">
+<h3>Hyperparameter Selection<a class="headerlink" href="#hyperparameter-selection" title="Permalink to this heading">#</a></h3>
+<p>hyperparameter selection is a critical step in building a random forest model. By carefully selecting the values of n_estimators and max_depth and using K-fold cross-validation to evaluate their performance, we can improve the accuracy and generalization performance of the model.</p>
+<p>We selected two hyperparameters, n_estimators and max_depth, to tune on. And use K-Fold cross validation to find the best performing pair of hyperparameters.</p>
+<p><strong>n_estimators</strong> :
+The number of trees in a random forest is controlled by the hyperparameter n_estimators. A larger value of n_estimators may improve the model’s performance by reducing the variance and increasing the model’s stability. However, if the value is too large, the model may become too complex and overfit the data, leading to poor generalization performance. Therefore, we need to carefully select an appropriate value of n_estimators to balance between model complexity and performance.</p>
+<p>To tune this hyperparameter, we will experiment with five different values: 10, 20, 30, 50, and 100. These values are chosen to cover a range of possibilities, from a small number of trees to a relatively large number of trees. By trying different values, we can observe how the model’s performance changes as n_estimators varies.</p>
+<p><strong>K-fold cross-validation</strong>:
+To evaluate the performance of the random forest with different hyperparameters, we will use K-fold cross-validation. In K-fold cross-validation, the data set is divided into K equal-sized subsets or folds. For each fold, the model is trained on the remaining K-1 folds and evaluated on the current fold. This process is repeated K times, with each fold being used as the validation set exactly once. The validation accuracies from each fold are then averaged to obtain the overall validation accuracy.</p>
+<p>Using K-fold cross-validation allows us to get a more reliable estimate of the model’s performance than a single train-test split. By repeating the process K times with different splits, we can ensure that our evaluation is not biased by the specific choice of the train-test split.</p>
+<p><strong>Selection of best hyperparameters</strong>:
+After performing K-fold cross-validation with different hyperparameter values, we select the pair of hyperparameters that produces the highest average validation accuracy. This pair of hyperparameters is then used to train the final random forest model on the entire training set. By selecting the best hyperparameters based on cross-validation performance, we can improve the generalization performance of the model on unseen data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;figures/figure7.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3e96836bd4529a67fa8a9c84e64d3125b42a521b70110f1fb443d9c38f63e4bc.png" src="_images/3e96836bd4529a67fa8a9c84e64d3125b42a521b70110f1fb443d9c38f63e4bc.png" />
+</div>
+</div>
+<p><em><strong>The above image is only a reference for Cross Validation method</strong></em></p>
+<p>Based on the plot below, it can be observed that increasing the number of estimators improves the performance of the random forest (RF) model when having the same max_depth. Conversely, when using the same number of trees, max_depth values of 1 or 5 result in the worst performance. After analyzing the plot, we have chosen max_depth=3 and n_estimators=50 as the optimal hyperparameters for our final model.</p>
+<p>Overall, this indicates that the performance of the RF model is sensitive to both max_depth and n_estimators, and selecting the appropriate values for these hyperparameters is crucial for achieving optimal performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;figures/figure4.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4d128ae9c9019e6671a0198a7ec43a62143fc4edfa231f9be15fcb34875dfa1f.png" src="_images/4d128ae9c9019e6671a0198a7ec43a62143fc4edfa231f9be15fcb34875dfa1f.png" />
+</div>
+</div>
+</section>
+<section id="model-result">
+<h3>Model Result<a class="headerlink" href="#model-result" title="Permalink to this heading">#</a></h3>
+<p>The trained random forest classifier was able to predict the correct label for 63.88% of the crime data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;figures/figure8.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/141ef42ec4c29fa95ca0fb198df329ce42021597db6e897e97e5a46f75b76df8.png" src="_images/141ef42ec4c29fa95ca0fb198df329ce42021597db6e897e97e5a46f75b76df8.png" />
+</div>
+</div>
+<p>Based on the output of our Random Forest (RF) model, the feature importances are as follows:</p>
+<ul class="simple">
+<li><p>age_at_current_charge: The age at the person’s current charge (importance: 0.0992). The age at which a person is charged with a crime is the most important feature in predicting future criminal behavior. This finding aligns with previous research, indicating that age plays a significant role in criminal activities.</p></li>
+<li><p>p_misdemeanor: Indicator of prior misdemeanor charges (importance: 0.0921). The presence of prior misdemeanor charges is the second most important feature. This suggests that individuals with a history of misdemeanor offenses are more likely to engage in future criminal behavior.</p></li>
+<li><p>p_charges: Total number of prior charges (importance: 0.083).The total count of prior charges is also an influential factor in predicting future crimes. This indicates that individuals with a higher number of previous charges are more prone to reoffending.</p></li>
+</ul>
+<p>These top three features have significant importance in predicting crime. Notably, age plays a crucial role in crime prediction. The younger a person is when they commit their first crime, the higher the likelihood of them committing future crimes. This highlights the importance of considering age-related factors in crime prevention strategies.</p>
+<p>It is worth mentioning that, during the model training process, we found that preparation and feature engineering on our dataset had a more substantial impact on improving the results compared to model selection and parameter tuning. The feature engineering conducted in section 1 significantly enhanced our overall performance.</p>
+<p>Upon reviewing our results, we were surprised to discover a strong relationship between age and criminal behavior. This finding emphasizes the significance of age as a predictive factor in crime analysis and prevention efforts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;figures/figure5.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4b31d116d990052d194f7b9c3c445284ee975410597b713aa3f67bd705e80d58.png" src="_images/4b31d116d990052d194f7b9c3c445284ee975410597b713aa3f67bd705e80d58.png" />
+</div>
+</div>
+<p>Based on the modeling output, we can validate that both assumptions made earlier for the study are supported by the findings.</p>
+<p>The assumption that age and the likelihood of committing a crime are related is supported by the analysis. The feature “age_at_current_charge” is identified as the most important feature in predicting future criminal behavior. This suggests that age plays a crucial role in determining the propensity to engage in criminal activities. The analysis confirms that younger individuals are more likely to commit crimes, possibly due to factors such as immaturity and lack of life experience. Additionally, the feature “age_at_first_charge” also has a significant importance value, further supporting the assumption that age is a relevant factor in criminal behavior.</p>
+<p>The assumption that there is a connection between the number of prior misdemeanor offenses and the likelihood of committing another crime is also supported by the analysis. The feature “p_misdemeanor” is identified as one of the top three important features in predicting future criminal behavior. This implies that individuals with a history of more prior misdemeanor offenses are more likely to reoffend. The analysis affirms that the count of prior misdemeanor charges is a relevant risk factor that can help identify individuals at a higher risk of committing additional crimes.</p>
+<p>It is important to note that while the analysis supports these assumptions based on the specific dataset and the findings from the Random Forest model, individual behaviors may vary, and these assumptions may not apply universally to every person in the Broward County dataset. Nonetheless, the findings align with previous research on the relationship between age, prior criminal history, and recidivism, further strengthening the validity of these assumptions in the context of the analysis.</p>
+</section>
+</section>
+<section id="author-contributions-section">
+<h2>Author Contributions section<a class="headerlink" href="#author-contributions-section" title="Permalink to this heading">#</a></h2>
+<p><em><strong>Andy Zuo</strong></em></p>
+<ul class="simple">
+<li><p>Responsible for parts of EDA and data cleaning</p></li>
+<li><p>Responsible for Model include justification, explanation, and coding</p></li>
+<li><p>Responsible for writing project report for main.ipynb include formating and explanation about the result</p></li>
+<li><p>Tried to do the github actions</p></li>
+</ul>
+<section id="helen-tan">
+<h3>Helen Tan<a class="headerlink" href="#helen-tan" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Completed Makefile</p></li>
+<li><p>Completed EDA</p></li>
+<li><p>Created new environment</p></li>
+<li><p>Created Jupyterbook</p></li>
+<li><p>Created PNG to figures folder</p></li>
+<li><p>Edited main notebook</p></li>
+<li><p>Edited EDAandModel notebook</p></li>
+<li><p>Edited <a class="reference external" href="http://README.md">README.md</a></p></li>
+<li><p>Attempted to github actions</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authors-andy-zuo-joowon-yang-helen">Authors: Andy Zuo, Joowon Yang, Helen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-data-on-a-computer-with-a-python-installation">Download the data on a computer with a python installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose-of-analysis">Purpose of Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumption-hypothesis">Assumption&amp; Hypothesis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-data">Read the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predict-using-the-random-forest-model">Predict Using the Random Forest Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-selection">Hyperparameter Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-result">Model Result</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#author-contributions-section">Author Contributions section</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#helen-tan">Helen Tan</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
