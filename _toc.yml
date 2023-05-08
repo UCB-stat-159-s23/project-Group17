@@ -3,7 +3,7 @@
 
 format: jb-book
 root: EDAandModel
-# chapters:
-# - file: markdown
+chapters:
+- file: EDAandModel
 # - file: notebooks
 # - file: markdown-notebooks
