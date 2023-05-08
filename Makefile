@@ -11,6 +11,10 @@ create_environment :
 .PHONY: html
 html:
 	jupyter-book build .
+	
+.PHONY: all
+all:
+	jupyterbook execute main.ipynb
 
 .PHONY: html-hub
 html-hub: conf.py
@@ -27,3 +31,8 @@ conf.py: _config.yml _toc.yml
 .PHONY: clean
 clean:
     rm -rf figures/*
+    rm -rf _build/*
+    
+.PHONY : help
+help : Makefile
+	@sed -n 's/^##//p' $<
