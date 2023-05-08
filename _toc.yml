@@ -4,6 +4,8 @@
 format: jb-book
 root: EDAandModel
 chapters:
-- file: EDAandModel.ipynb
-# - file: notebooks
+- file: main.ipynb
+- file: README.md
+- file: references.bib
+- file: project-description.md
 # - file: markdown-notebooks
