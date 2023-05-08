@@ -5,4 +5,4 @@
 Binder Link : 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCB-stat-159-s23/project-Group17.git/HEAD)
 
-Description:
+Description: This project analyzes the Broward County dataset to identify the key factors that contribute to the likelihood of future criminal activity. Machine learning techniques are used to process various features and predict which features increase the chances of committing crimes.
