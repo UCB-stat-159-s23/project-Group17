@@ -14,6 +14,7 @@ html:
 	
 .PHONY: all
 all:
+	jupyterbook execute EDAandModel.ipynb
 	jupyterbook execute main.ipynb
 
 .PHONY: html-hub
