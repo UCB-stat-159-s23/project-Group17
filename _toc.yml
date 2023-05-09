@@ -6,5 +6,6 @@ root: README.md
 chapters:
 - file: main
 - file: EDAandModel
+title: EDA and Model
 - file: references.bib
 # - file: markdown-notebooks
