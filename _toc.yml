@@ -4,7 +4,7 @@
 format: jb-book
 root: README.md
 chapters:
-- file: main.ipynb
+- file: main
 - file: EDAandModel
 - file: references.bib
 # - file: markdown-notebooks
