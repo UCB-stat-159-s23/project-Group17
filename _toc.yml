@@ -2,10 +2,9 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: EDAandModel
+root: main.ipynb
 chapters:
-- file: main.ipynb
+- file: EDAandModel
 - file: README.md
 - file: references.bib
-- file: project-description.md
 # - file: markdown-notebooks
