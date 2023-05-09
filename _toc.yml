@@ -6,6 +6,5 @@ root: README.md
 chapters:
 - file: main.ipynb
 - file: EDAandModel.ipynb
-title: EDA and Model
 - file: references.bib
 # - file: markdown-notebooks
